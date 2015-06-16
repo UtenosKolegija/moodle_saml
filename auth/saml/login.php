@@ -76,7 +76,7 @@ echo '<center>';
 
 if (in_array('saml', $authsequence)){
     if (isset($saml_config->samllogoimage) && $saml_config->samllogoimage != NULL) {
-        echo '<a href="' . $samlUrl . '"><img src="'.$saml_config->samllogoimage.'" border="0" alt="SAML login" ></a>';
+        echo '<a href="' . $samlUrl . '" data-ajax="false"><img src="'.$saml_config->samllogoimage.'" border="0" alt="SAML login" ></a>';
     }
     if (isset($saml_config->samllogoinfo)) {
         echo "<div class='desc'>$saml_config->samllogoinfo</div>";
