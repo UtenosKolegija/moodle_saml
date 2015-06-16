@@ -86,6 +86,11 @@ echo '</center>';
 
 ?>
       <div class="subcontent loginsub">
+      <?php
+        $visible = !empty($errormsg) || isset($_GET["a"]);
+        $hidden = $visible ? "" : "style=\"display: none\"";
+      ?>
+      <?php if ($visible) { ?>
         <div class="desc">
           <?php
             /*
@@ -107,8 +112,8 @@ echo '</center>';
               echo '</div>';
           }
         ?>
-        <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> >
-          <div class="loginform">
+        <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> <?php echo $hidden; ?>>
+          <div class="loginform" style="width: 100% !important">
             <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
             <div class="form-input">
               <input type="text" name="username" id="username" size="15" value="<?php echo isset($frm->username)? $frm->username: ''; ?>" />
@@ -130,6 +135,16 @@ echo '</center>';
           <div class="clearer"><!-- --></div>
           <div class="forgetpass"><a href="<?php echo $CFG->httpswwwroot; ?>/login/forgot_password.php"><?php print_string("forgotten") ?></a></div>
         </form>
+      <?php } else { ?>
+        <div class="desc" style="font-size: x-small">
+          <a href="?a=1">(<?php
+            if (current_language() == "lt")
+              echo "administratoriams";
+            else
+              echo "administrators";
+            ?>)</a>
+        </div>
+      <?php } ?>
       </div>
 
 <?php if ($CFG->guestloginbutton and !isguestuser()) {  ?>
