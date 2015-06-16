@@ -88,11 +88,17 @@ echo '</center>';
       <div class="subcontent loginsub">
         <div class="desc">
           <?php
+            /*
             print_string("auth_saml_loginusing", "auth_saml");
             echo '<br/>';
             echo '('.get_string("cookiesenabled").')';
             echo $OUTPUT->help_icon('cookiesenabled');
-           ?>
+            */
+            if (current_language() == "lt")
+              echo "Prisjunkite kaip vietinis Moodle vartotojas:";
+            else
+              echo "Log in directly with your old account:";
+          ?>
         </div>
         <?php
           if (!empty($errormsg)) {
