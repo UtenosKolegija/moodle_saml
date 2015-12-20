@@ -36,6 +36,9 @@ if (!empty($CFG->registerauth) or is_enabled_auth('none') or !empty($CFG->auth_i
     $show_instructions = false;
 }
 
+// foo
+$show_instructions = false;
+
 $loginsite = get_string("loginsite");
 $PAGE->navbar->add($loginsite);
 
