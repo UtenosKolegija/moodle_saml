@@ -143,7 +143,7 @@ define('SAML_INTERNAL', 1);
             auth_saml_error($err['login'], '?logout', $pluginconfig->samllogfile);
         }
         $username = $saml_attributes[$username_field][0];
-        $username = trim(core_text::strtolower($username));
+        $username = trim(strtolower($username));
 
         $saml_courses = array();
         if($pluginconfig->supportcourses != 'nosupport' && isset($pluginconfig->samlcourses)) {
@@ -167,6 +167,12 @@ define('SAML_INTERNAL', 1);
         
         if (function_exists('saml_hook_user_exists')) {
             $user_exists = $user_exists && saml_hook_user_exists($username, $saml_attributes, $user_exists);
+        }
+
+        if (!$user_exists && $pluginconfig->disablejit) {
+            $jit_not_active = get_string("auth_saml_jit_not_active", "auth_saml", $username);
+            $err['login'] = "<p>". $jit_not_active . "</p>";
+            auth_saml_error($err, '?logout', $pluginconfig->samllogfile);
         }
 
         $authorize_user = true;
